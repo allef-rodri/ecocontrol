@@ -1,4 +1,4 @@
 package br.com.fiap.ecocontrol.dto;
 
-public class ConfigEquipamentoCadastroDto {
+public record ConfigEquipamentoCadastroDto() {
 }
