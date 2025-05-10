@@ -1,4 +1,52 @@
 package br.com.fiap.ecocontrol.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.List;
+
+@Entity
+@Table(name = "DB_EQUIPAMENTO")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class Equipamento {
+
+    @Id
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "SEQ_DB_EQUIPAMENTO"
+    )
+    @SequenceGenerator(
+            name = "SEQ_DB_EQUIPAMENTO",
+            sequenceName = "SEQ_DB_EQUIPAMENTO",
+            allocationSize = 1
+    )
+    @Column(name = "id_equipamento")
+    private Long idEquipamento;
+
+    @Column(name = "de_equipamento")
+    private String deEquipamento;
+
+    @Column(name = "tipo")
+    private String tipo;
+
+    @Column(name = "consumo_maximo")
+    private Double consumoMaximo;
+
+    @Column(name = "status")
+    private String status;
+
+    @ManyToOne
+    @JoinColumn(name = "id_setor", referencedColumnName = "id_setor")
+    private Setor setor;
+
+    @OneToMany(mappedBy = "equipamento", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<LeituraConsumo> consumos;
+
 }
