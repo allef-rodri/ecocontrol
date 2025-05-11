@@ -135,6 +135,129 @@ Recupera uma lista paginada de todos os alertas registrados no sistema.
 
 ---
 
+Vou adicionar a documentação dos endpoints de Setor ao EcoControlAPIDocumentation.md:
+
+### 3. Gerenciamento de Setores
+
+Endpoints para gerenciar os setores da aplicação.
+
+#### 3.1. Listar Setores
+
+Retorna todos os setores cadastrados no sistema.
+
+- **Método:** `GET`
+- **Path:** `/api/setores`
+- **Autenticação:** Basic Auth necessária
+
+**Resposta de Sucesso (200 OK):**
+```json
+[
+    {
+    "idSetor": 1,
+    "deSetor": "Produção",
+    "localizacao": "Bloco A - Térreo"
+    },
+    {
+    "idSetor": 2,
+    "deSetor": "Almoxarifado",
+    "localizacao": "Bloco B - Subsolo"
+    }
+]
+```
+#### 3.2. Detalhar Setor
+
+Retorna os detalhes de um setor específico.
+
+- **Método:** `GET`
+- **Path:** `/api/setores/{id}`
+- **Autenticação:** Basic Auth necessária
+
+**Resposta de Sucesso (200 OK):**
+```json
+{
+"idSetor": 1,
+"deSetor": "Produção",
+"localizacao": "Bloco A - Térreo"
+}
+```
+#### 3.3. Cadastrar Setor
+
+Cria um novo setor no sistema.
+
+- **Método:** `POST`
+- **Path:** `/api/setores`
+- **Autenticação:** Basic Auth necessária
+
+**Corpo da Requisição:**
+```json
+{
+"deSetor": "Produção",
+"localizacao": "Bloco A - Térreo"
+}
+```
+**Validações:**
+- `deSetor`: obrigatório, máximo 100 caracteres
+- `localizacao`: obrigatório, máximo 200 caracteres
+
+**Resposta de Sucesso (201 Created):**
+```json
+{
+"idSetor": 1,
+"deSetor": "Produção",
+"localizacao": "Bloco A - Térreo"
+}
+```
+#### 3.4. Atualizar Setor
+
+Atualiza os dados de um setor existente.
+
+- **Método:** `PUT`
+- **Path:** `/api/setores/{id}`
+- **Autenticação:** Basic Auth necessária
+
+**Corpo da Requisição:**
+```json
+{
+"deSetor": "Produção Atualizado",
+"localizacao": "Bloco A - 1º Andar"
+}
+```
+**Resposta de Sucesso (200 OK):**
+```json
+{
+    "idSetor": 1,
+    "deSetor": "Produção Atualizado",
+    "localizacao": "Bloco A - 1º Andar"
+}
+```
+
+#### 3.5. Excluir Setor
+
+Remove um setor do sistema.
+
+- **Método:** `DELETE`
+- **Path:** `/api/setores/{id}`
+- **Autenticação:** Basic Auth necessária
+
+**Resposta de Sucesso (204 No Content)**
+
+**Respostas de Erro Comuns para todos os endpoints:**
+- `400 Bad Request`: Dados inválidos na requisição
+- `401 Unauthorized`: Credenciais de autenticação ausentes ou inválidas
+- `404 Not Found`: Setor não encontrado
+- `500 Internal Server Error`: Erro interno do servidor
+
+Esta documentação fornece todas as informações necessárias para usar os endpoints de Setor, incluindo:
+- Métodos HTTP
+- URLs
+- Formatos de requisição e resposta
+- Códigos de status HTTP
+- Exemplos de payload
+- Validações
+- Possíveis erros
+
+---
+
 Este `EcoControlAPIDocumentation.md` deve ser um bom ponto de partida. Você pode adicionar mais seções conforme sua API evolui, como:
 *   Detalhes sobre o modelo de dados.
 *   Como configurar o ambiente de desenvolvimento.
