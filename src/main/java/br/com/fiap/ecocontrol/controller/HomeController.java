@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/api/status") // Mantive o /api que sugeri anteriormente, ajuste se necessário
+@RequestMapping(value = "/") // Mantive o /api que sugeri anteriormente, ajuste se necessário
 public class HomeController {
 
     @Value("${spring.profiles.active:default}")

@@ -25,7 +25,7 @@ A seguir, estão listados os endpoints disponíveis na API.
 Retorna informações sobre o estado atual da aplicação, incluindo uso de memória e o perfil de ambiente ativo.
 
 -   **Método:** `GET`
--   **Path:** `/api/status`
+-   **Path:** `/`
 -   **Autenticação:** Pode requerer Basic Auth (ver Credenciais de Segurança Padrão).
 
 **Parâmetros da Requisição:**
@@ -135,7 +135,7 @@ Recupera uma lista paginada de todos os alertas registrados no sistema.
 
 ---
 
-Este `README.md` deve ser um bom ponto de partida. Você pode adicionar mais seções conforme sua API evolui, como:
+Este `EcoControlAPIDocumentation.md` deve ser um bom ponto de partida. Você pode adicionar mais seções conforme sua API evolui, como:
 *   Detalhes sobre o modelo de dados.
 *   Como configurar o ambiente de desenvolvimento.
 *   Instruções de build e deploy.
