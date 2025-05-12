@@ -2,17 +2,91 @@
 
 Bem-vindo à documentação da API EcoControl. Esta API é responsável por gerenciar e monitorar dados relacionados ao controle ambiental.
 
-## Configuração Inicial
+# Guia de Execução do Docker para EcoControl
+## 1. Pré-requisitos
+Antes de começar, certifique-se de ter instalado:
+- [Docker](https://docs.docker.com/get-docker/)
+- [Docker Compose](https://docs.docker.com/compose/install/) (geralmente já vem com o Docker Desktop)
 
-Para executar esta aplicação, você precisará ter o Java (SDK 22 ou superior) e o Maven configurados em seu ambiente.
-As configurações de banco de dados e segurança padrão estão no arquivo `src/main/resources/application.properties`.
+## 2. Estrutura do Projeto
+O projeto já possui os arquivos necessários para o Docker:
+- - Define como a imagem será construída `Dockerfile`
+- - Define como os serviços serão executados `docker-compose.yml`
+- - Lista arquivos que devem ser ignorados no build `.dockerignore`
 
-**Credenciais de Segurança Padrão (Basic Auth):**
-Por padrão, o Spring Security está configurado com um usuário e senha básicos. Você precisará fornecer essas credenciais ao acessar os endpoints protegidos.
--   **Usuário:** `Allef`
--   **Senha:** `12345`
+## 3. Comandos Básicos
+### 3.1. Construir a Imagem
+``` bash
+docker build -t ecocontrol .
+```
+Este comando irá:
+1. Usar o Maven para compilar o projeto
+2. Criar uma imagem otimizada com o JRE
+3. Configurar o ambiente de execução
 
-*Observação: Em breve, um sistema de autenticação baseado em token via um `AuthController` dedicado será implementado para uma segurança mais robusta e adequada para APIs.*
+### 3.2. Executar com Docker Compose
+``` bash
+docker-compose up -d
+```
+Este comando irá:
+1. Iniciar o container em modo detached (background)
+2. Expor a porta 8080
+3. Configurar as variáveis de ambiente definidas no `docker-compose.yml`
+
+### 3.3. Verificar Status
+``` bash
+docker ps
+```
+Isso mostrará se o container está rodando corretamente.
+### 3.4. Visualizar Logs
+``` bash
+docker logs ecocontrol
+```
+ou em modo contínuo:
+``` bash
+docker logs -f ecocontrol
+```
+### 3.5. Parar o Container
+``` bash
+docker-compose down
+```
+## 4. Configurações Importantes
+### 4.1. Variáveis de Ambiente
+No `docker-compose.yml`
+- `SPRING_PROFILES_ACTIVE: dev` - Define o perfil ativo
+
+### 4.2. Portas
+- A aplicação está configurada para rodar na porta 8080
+- O mapeamento de porta está definido como "8080:8080" no `docker-compose.yml`
+
+## 5. Solução de Problemas
+Se encontrar problemas:
+1. **Container não inicia:**
+``` bash
+docker logs ecocontrol
+```
+2. **Problemas de rede:**
+``` bash
+docker network ls
+docker network inspect bridge
+```
+3. **Limpar ambiente:**
+``` bash
+docker-compose down
+docker system prune
+```
+4. **Reconstruir sem cache:**
+``` bash
+docker-compose build --no-cache
+docker-compose up -d
+```
+## 6. Acessando a Aplicação
+Após iniciar o container, a aplicação estará disponível em:
+- [http://localhost:8080](http://localhost:8080)
+
+Lembre-se das credenciais padrão:
+- Usuário: `Allef`
+- Senha: `12345`
 
 ## Endpoints da API
 
