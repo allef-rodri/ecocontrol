@@ -258,9 +258,174 @@ Esta documentação fornece todas as informações necessárias para usar os end
 
 ---
 
-Este `EcoControlAPIDocumentation.md` deve ser um bom ponto de partida. Você pode adicionar mais seções conforme sua API evolui, como:
-*   Detalhes sobre o modelo de dados.
-*   Como configurar o ambiente de desenvolvimento.
-*   Instruções de build e deploy.
-*   Endpoints para criação, atualização e exclusão de recursos (CRUD).
-*   Informações sobre o `AuthController` quando ele for implementado.
+### 4. Gerenciamento de Equipamentos
+
+Endpoints para gerenciar os equipamentos da aplicação.
+
+#### 4.1. Listar Equipamentos
+
+Retorna todos os equipamentos cadastrados no sistema.
+
+- **Método:** `GET`
+- **Path:** `/api/equipamentos/listartodos`
+- **Autenticação:** Basic Auth necessária
+
+**Resposta de Sucesso (200 OK):**
+```json
+[
+  {
+    "idEquipamento": 1,
+    "deEquipamento": "Ar Condicionado",
+    "tipo": "Climatização",
+    "consumoMaximo": 1500.00,
+    "status": "Ligado",
+    "setor": {
+      "idSetor": 1,
+      "deSetor": "Diretoria",
+      "localizacao": "Décimo Andar - Sala 1002"
+    }
+  },
+  {
+    "idEquipamento": 2,
+    "deEquipamento": "Geladeira",
+    "tipo": "Refrigeração",
+    "consumoMaximo": 55.00,
+    "status": "Ligado",
+    "setor": {
+      "idSetor": 5,
+      "deSetor": "Refeitório",
+      "localizacao": "Primeiro Andar"
+    }
+  }
+]
+```
+#### 4.2. Detalhar Equipamento
+
+Retorna os detalhes de um equipamento específico.
+
+- **Método:** `GET`
+- **Path:** `/api/equipamentos/{id}`
+- **Autenticação:** Basic Auth necessária
+
+**Parâmetros do Path:**
+- `id` (Long, obrigatório): ID do equipamento
+
+**Resposta de Sucesso (200 OK):**
+```json
+{
+  "idEquipamento": 1,
+  "deEquipamento": "Ar Condicionado",
+  "tipo": "Climatização",
+  "consumoMaximo": 1500.00,
+  "status": "Ligado",
+  "setor": {
+    "idSetor": 1,
+    "deSetor": "Diretoria",
+    "localizacao": "Décimo Andar - Sala 1002"
+  }
+}
+```
+#### 4.3. Cadastrar Equipamento
+
+Cria um novo equipamento no sistema.
+
+- **Método:** `POST`
+- **Path:** `/api/equipamentos`
+- **Autenticação:** Basic Auth necessária
+
+**Corpo da Requisição:**
+```json
+{
+    "deEquipamento": "Ar Condicionado",
+    "tipo": "Climatização",
+    "consumoMaximo": 1500.00,
+    "status": "Ligado",
+    "idSetor": 1
+}
+```
+**Validações:**
+- `deEquipamento`: obrigatório, máximo 100 caracteres
+- `tipo`: obrigatório, máximo 100 caracteres
+- `consumoMaximo`: obrigatório, valor positivo
+- `status`: obrigatório, máximo 20 caracteres
+- `idSetor`: obrigatório, deve referenciar um setor existente
+
+**Resposta de Sucesso (201 Created):**
+```json
+{
+    "idEquipamento": 1,
+    "deEquipamento": "Ar Condicionado",
+    "tipo": "Climatização",
+    "consumoMaximo": 1500.00,
+    "status": "Ligado",
+    "setor": {
+        "idSetor": 1,
+        "deSetor": "Diretoria",
+        "localizacao": "Décimo Andar - Sala 1002"
+    }
+}
+```
+#### 4.4. Atualizar Equipamento
+
+Atualiza os dados de um equipamento existente.
+
+- **Método:** `PUT`
+- **Path:** `/api/equipamentos/{id}`
+- **Autenticação:** Basic Auth necessária
+
+**Parâmetros do Path:**
+- `id` (Long, obrigatório): ID do equipamento
+
+**Corpo da Requisição:**
+```json
+{
+    "deEquipamento": "Ar Condicionado Atualizado",
+    "tipo": "Climatização",
+    "consumoMaximo": 1800.00,
+    "status": "Manutenção",
+    "idSetor": 1
+}
+```
+**Resposta de Sucesso (200 OK):**
+```json
+{
+  "idEquipamento": 1,
+  "deEquipamento": "Ar Condicionado Atualizado",
+  "tipo": "Climatização",
+  "consumoMaximo": 1800.00,
+  "status": "Manutenção",
+  "setor": {
+    "idSetor": 1,
+    "deSetor": "Diretoria",
+    "localizacao": "Décimo Andar - Sala 1002"
+  }
+}
+```
+#### 4.5. Excluir Equipamento
+
+Remove um equipamento do sistema.
+
+- **Método:** `DELETE`
+- **Path:** `/api/equipamentos/{id}`
+- **Autenticação:** Basic Auth necessária
+
+**Parâmetros do Path:**
+- `id` (Long, obrigatório): ID do equipamento
+
+**Resposta de Sucesso (204 No Content)**
+
+**Respostas de Erro Comuns para todos os endpoints:**
+- `400 Bad Request`: Dados inválidos na requisição
+- `401 Unauthorized`: Credenciais de autenticação ausentes ou inválidas
+- `404 Not Found`: Equipamento não encontrado
+- `500 Internal Server Error`: Erro interno do servidor
+
+---
+
+Este `EcoControlAPIDocumentation.md` deve ser um bom ponto de partida.
+- URLs e métodos HTTP
+- Parâmetros necessários
+- Formatos de requisição e resposta
+- Exemplos práticos
+- Validações
+- Possíveis códigos de resposta
