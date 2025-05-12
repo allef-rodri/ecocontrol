@@ -1,4 +1,9 @@
 package br.com.fiap.ecocontrol.dto;
 
-public record LeituraConsumoCadastroDto() {
-}
+import java.time.LocalDateTime;
+
+public record LeituraConsumoCadastroDto(
+        Double kwhConsumido,
+        LocalDateTime dataHoraLeitura,
+        Long idEquipamento
+) {}
