@@ -35,13 +35,14 @@ Nenhum.
 ```json
 {
   "status": "UP",
-  "environment": "dev", // ou o perfil ativo, ex: "dev", "prod"
-  "totalMemory": 536870912, // Memória total alocada para a JVM (bytes)
-  "freeMemory": 275173776,  // Memória livre dentro da alocada (bytes)
-  "maxMemory": 8589934592,   // Memória máxima que a JVM pode usar (bytes)
-  "usedMemory": 261697136   // Memória usada (totalMemory - freeMemory) (bytes)
+  "environment": "dev",
+  "totalMemory": 536870912,
+  "freeMemory": 275173776,
+  "maxMemory": 8589934592,
+  "usedMemory": 261697136
 }
 ```
+**Memória em bytes**
 
 **Respostas de Erro Comuns:**
 -   `401 Unauthorized`: Se as credenciais de autenticação não forem fornecidas ou forem inválidas.
@@ -54,7 +55,7 @@ Nenhum.
 Recupera uma lista paginada de todos os alertas registrados no sistema.
 
 -   **Método:** `GET`
--   **Path:** `/alertas/listartodos`
+-   **Path:** `/api/alertas/listartodos`
 -   **Autenticação:** Pode requerer Basic Auth (ver Credenciais de Segurança Padrão).
 
 **Parâmetros da Requisição (Query Parameters opcionais para paginação):**
@@ -68,7 +69,7 @@ Recupera uma lista paginada de todos os alertas registrados no sistema.
     -   Exemplo: `?sort=tipoAlerta,asc` (ordena pelo tipo de alerta, ascendente)
 
 **Exemplo de Requisição:**
-`GET http://localhost:8080/alertas/listartodos?page=0&size=5&sort=dataHoraAlerta,desc`
+`GET http://localhost:8080/api/alertas/listartodos?page=0&size=5&sort=dataHoraAlerta,desc`
 
 **Exemplo de Resposta de Sucesso (200 OK):**
 ```json
@@ -83,7 +84,6 @@ Recupera uma lista paginada de todos os alertas registrados no sistema.
         "idEquipamento": 101,
         "nomeEquipamento": "Sensor de Temperatura A",
         "localizacao": "Bloco A, Sala 10"
-        // Outros campos do EquipamentoExibicaoDto
       }
     },
     {
@@ -95,10 +95,8 @@ Recupera uma lista paginada de todos os alertas registrados no sistema.
         "idEquipamento": 202,
         "nomeEquipamento": "Sensor de Nível B",
         "localizacao": "Bloco C, Área Externa"
-        // Outros campos do EquipamentoExibicaoDto
       }
     }
-    // ... mais alertas
   ],
   "pageable": {
     "pageNumber": 0,
