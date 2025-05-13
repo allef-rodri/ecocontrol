@@ -2,6 +2,10 @@ package br.com.fiap.ecocontrol.controller;
 
 import br.com.fiap.ecocontrol.dto.SetorCadastroDto;
 import br.com.fiap.ecocontrol.dto.SetorExibicaoDto;
+import br.com.fiap.ecocontrol.exception.setor.ErroAtualizarSetorException;
+import br.com.fiap.ecocontrol.exception.setor.ErroCriarSetorException;
+import br.com.fiap.ecocontrol.exception.setor.ErroExcluirSetorException;
+import br.com.fiap.ecocontrol.exception.setor.SetorNaoEncontradoException;
 import br.com.fiap.ecocontrol.service.SetorService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +30,13 @@ public class SetorController {
 
     @GetMapping("/{id}")
     public ResponseEntity<SetorExibicaoDto> detalhar(@PathVariable Long id) {
-        return ResponseEntity.ok(setorService.buscarPorId(id));
+        try {
+            return ResponseEntity.ok(setorService.buscarPorId(id));
+        } catch (SetorNaoEncontradoException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new RuntimeException("Erro ao buscar setor por ID.", e);
+        }
     }
 
     @PostMapping
@@ -34,9 +44,14 @@ public class SetorController {
             @RequestBody @Valid SetorCadastroDto dto,
             UriComponentsBuilder uriBuilder
     ) {
-        SetorExibicaoDto setor = setorService.criar(dto);
-        URI uri = uriBuilder.path("/api/setores/{id}").buildAndExpand(setor.idSetor()).toUri();
-        return ResponseEntity.created(uri).body(setor);
+        try {
+            SetorExibicaoDto setor = setorService.criar(dto);
+            URI uri = uriBuilder.path("/api/setores/{id}")
+                    .buildAndExpand(setor.idSetor()).toUri();
+            return ResponseEntity.created(uri).body(setor);
+        } catch (Exception e) {
+            throw new ErroCriarSetorException("Erro ao cadastrar setor.");
+        }
     }
 
     @PutMapping("/{id}")
@@ -44,12 +59,24 @@ public class SetorController {
             @PathVariable Long id,
             @RequestBody @Valid SetorCadastroDto dto
     ) {
-        return ResponseEntity.ok(setorService.atualizar(id, dto));
+        try {
+            return ResponseEntity.ok(setorService.atualizar(id, dto));
+        } catch (SetorNaoEncontradoException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ErroAtualizarSetorException("Erro ao atualizar setor.");
+        }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluir(@PathVariable Long id) {
-        setorService.deletar(id);
-        return ResponseEntity.noContent().build();
+        try {
+            setorService.deletar(id);
+            return ResponseEntity.noContent().build();
+        } catch (SetorNaoEncontradoException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new ErroExcluirSetorException("Erro ao excluir setor.");
+        }
     }
 }

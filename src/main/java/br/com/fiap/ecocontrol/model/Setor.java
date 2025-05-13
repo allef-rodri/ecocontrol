@@ -39,4 +39,31 @@ public class Setor {
     @JsonIgnore
     private List<Equipamento> equipamentos;
 
+    public Long getIdSetor() {
+        return idSetor;
+    }
+
+    public String getDeSetor() {
+        return deSetor;
+    }
+
+    public String getLocalizacao() {
+        return localizacao;
+    }
+
+    public List<Equipamento> getEquipamentos() {
+        return equipamentos;
+    }
+
+    public void setDeSetor(String deSetor) {
+        this.deSetor = deSetor;
+    }
+
+    public void setLocalizacao(String localizacao) {
+        this.localizacao = localizacao;
+    }
+
+    public void setEquipamentos(List<Equipamento> equipamentos) {
+        this.equipamentos = equipamentos;
+    }
 }

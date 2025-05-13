@@ -1,6 +1,7 @@
 package br.com.fiap.ecocontrol.controller;
 
 import br.com.fiap.ecocontrol.dto.HealthStatusDto;
+import br.com.fiap.ecocontrol.exception.healthStatus.HealthStatusException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,18 +17,23 @@ public class HomeController {
 
     @GetMapping
     public ResponseEntity<HealthStatusDto> getApplicationStatus() {
-        Runtime runtime = Runtime.getRuntime();
-        long totalMemory = runtime.totalMemory();
-        long freeMemory = runtime.freeMemory();
-        long maxMemory = runtime.maxMemory();
+        try {
+            Runtime runtime = Runtime.getRuntime();
+            long totalMemory = runtime.totalMemory();
+            long freeMemory = runtime.freeMemory();
+            long maxMemory = runtime.maxMemory();
 
-        HealthStatusDto statusDto = new HealthStatusDto(
-                "UP",
-                activeProfile,
-                totalMemory,
-                freeMemory,
-                maxMemory
-        );
-        return ResponseEntity.ok(statusDto);
+            HealthStatusDto statusDto = new HealthStatusDto(
+                    "UP",
+                    activeProfile,
+                    totalMemory,
+                    freeMemory,
+                    maxMemory
+            );
+
+            return ResponseEntity.ok(statusDto);
+        } catch (Exception e) {
+            throw new HealthStatusException("Erro ao obter o status da aplicação", e);
+        }
     }
 }

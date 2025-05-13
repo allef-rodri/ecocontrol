@@ -1,6 +1,7 @@
 package br.com.fiap.ecocontrol.service;
 
 import br.com.fiap.ecocontrol.dto.AlertaExibicaoDto;
+import br.com.fiap.ecocontrol.exception.alerta.ErroListagemAlertasException;
 import br.com.fiap.ecocontrol.repository.AlertaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -14,9 +15,13 @@ public class AlertaService {
     private AlertaRepository alertaRepository;
 
     public Page<AlertaExibicaoDto> listarTodosOsAlertas(Pageable paginacao) {
-        return alertaRepository
-                .findAll(paginacao)
-                .map(AlertaExibicaoDto::new);
+        try {
+            return alertaRepository
+                    .findAll(paginacao)
+                    .map(AlertaExibicaoDto::new);
+        } catch (Exception e) {
+            throw new ErroListagemAlertasException("Erro ao listar os alertas: " + e.getMessage());
+        }
     }
 
 }

@@ -38,4 +38,31 @@ public class LeituraConsumo {
     @JoinColumn(name = "id_equipamento", referencedColumnName = "id_equipamento")
     private Equipamento equipamento;
 
+    public Long getIdLeitura() {
+        return idLeitura;
+    }
+
+    public LocalDateTime getDataHoraLeitura() {
+        return dataHoraLeitura;
+    }
+
+    public Double getKwhConsumido() {
+        return kwhConsumido;
+    }
+
+    public Equipamento getEquipamento() {
+        return equipamento;
+    }
+
+    public void setDataHoraLeitura(LocalDateTime dataHoraLeitura) {
+        this.dataHoraLeitura = dataHoraLeitura;
+    }
+
+    public void setKwhConsumido(Double kwhConsumido) {
+        this.kwhConsumido = kwhConsumido;
+    }
+
+    public void setEquipamento(Equipamento equipamento) {
+        this.equipamento = equipamento;
+    }
 }

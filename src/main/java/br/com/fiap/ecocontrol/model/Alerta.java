@@ -40,4 +40,39 @@ public class Alerta {
     @JoinColumn(name = "id_equipamento", referencedColumnName = "id_equipamento")
     private Equipamento equipamento;
 
+    public Long getIdAlerta() {
+        return idAlerta;
+    }
+
+    public String getTipoAlerta() {
+        return tipoAlerta;
+    }
+
+    public String getMensagem() {
+        return mensagem;
+    }
+
+    public LocalDateTime getDataHoraAlerta() {
+        return dataHoraAlerta;
+    }
+
+    public Equipamento getEquipamento() {
+        return equipamento;
+    }
+
+    public void setTipoAlerta(String tipoAlerta) {
+        this.tipoAlerta = tipoAlerta;
+    }
+
+    public void setMensagem(String mensagem) {
+        this.mensagem = mensagem;
+    }
+
+    public void setDataHoraAlerta(LocalDateTime dataHoraAlerta) {
+        this.dataHoraAlerta = dataHoraAlerta;
+    }
+
+    public void setEquipamento(Equipamento equipamento) {
+        this.equipamento = equipamento;
+    }
 }

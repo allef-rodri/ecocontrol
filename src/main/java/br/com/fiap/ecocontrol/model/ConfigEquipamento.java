@@ -36,4 +36,23 @@ public class ConfigEquipamento {
     @JoinColumn(name = "id_equipamento", referencedColumnName = "id_equipamento")
     private Equipamento equipamento;
 
+    public Long getIdConfig() {
+        return idConfig;
+    }
+
+    public Double getLimiteKwh() {
+        return limiteKwh;
+    }
+
+    public Equipamento getEquipamento() {
+        return equipamento;
+    }
+
+    public void setLimiteKwh(Double limiteKwh) {
+        this.limiteKwh = limiteKwh;
+    }
+
+    public void setEquipamento(Equipamento equipamento) {
+        this.equipamento = equipamento;
+    }
 }

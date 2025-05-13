@@ -49,4 +49,55 @@ public class Equipamento {
     @JsonIgnore
     private List<LeituraConsumo> consumos;
 
+    public Long getIdEquipamento() {
+        return idEquipamento;
+    }
+
+    public String getDeEquipamento() {
+        return deEquipamento;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public Double getConsumoMaximo() {
+        return consumoMaximo;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public Setor getSetor() {
+        return setor;
+    }
+
+    public List<LeituraConsumo> getConsumos() {
+        return consumos;
+    }
+
+    public void setDeEquipamento(String deEquipamento) {
+        this.deEquipamento = deEquipamento;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public void setConsumoMaximo(Double consumoMaximo) {
+        this.consumoMaximo = consumoMaximo;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setSetor(Setor setor) {
+        this.setor = setor;
+    }
+
+    public void setConsumos(List<LeituraConsumo> consumos) {
+        this.consumos = consumos;
+    }
 }
