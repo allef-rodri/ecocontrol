@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["idLeitura", "kwhConsumido", "dataHoraLeitura", "nomeEquipamento", "nomeSetor"],
+  "properties": {
+    "idLeitura": { "type": "number" },
+    "kwhConsumido": { "type": "number" },
+    "dataHoraLeitura": { "type": "string", "minLength": 1 },
+    "nomeEquipamento": { "type": "string", "minLength": 1 },
+    "nomeSetor": { "type": "string", "minLength": 1 }
+  },
+  "additionalProperties": true
+}

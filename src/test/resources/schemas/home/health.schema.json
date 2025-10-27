@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["status", "environment", "totalMemory", "freeMemory", "maxMemory", "usedMemory"],
+  "properties": {
+    "status": { "type": "string", "enum": ["UP", "DOWN"] },
+    "environment": { "type": "string" },
+    "totalMemory": { "type": "number" },
+    "freeMemory": { "type": "number" },
+    "maxMemory": { "type": "number" },
+    "usedMemory": { "type": "number" }
+  },
+  "additionalProperties": true
+}

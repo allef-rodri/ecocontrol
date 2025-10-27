@@ -51,6 +51,12 @@
             <version>5.5.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>json-schema-validator</artifactId>
+            <version>5.5.0</version>
+            <scope>test</scope>
+        </dependency>
         <!-- Google Gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -62,6 +68,11 @@
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
             <version>7.18.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>

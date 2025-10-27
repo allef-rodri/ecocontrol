@@ -1,5 +1,17 @@
 # Getting Started
 
+## Testes Automatizados com BDD
+
+Os cenários de testes comportamentais foram implementados com Cucumber e RestAssured para validar todas as APIs expostas pela EcoControl.
+
+- Pré-requisito: certifique-se de dar permissão de execução para o wrapper do Maven na primeira utilização com `chmod +x mvnw`.
+- Execução dos testes: `./mvnw test`
+- Os testes sobem a aplicação Spring Boot com o profile `test`, utilizando um banco H2 em memória e dados de carga definidos em `src/test/resources/data.sql`.
+- As chamadas autenticadas usam o usuário `analista/analista123` criado automaticamente durante a inicialização do contexto de testes.
+- Os cenários BDD estão em `src/test/resources/features` e os contratos JSON em `src/test/resources/schemas`.
+
+Ao final da execução, o relatório padrão do Cucumber é exibido no console. Para pipelines de CI, basta reutilizar o mesmo comando.
+
 ### Reference Documentation
 For further reference, please consider the following sections:
 
@@ -31,4 +43,3 @@ Due to Maven's design, elements are inherited from the parent POM to the project
 While most of the inheritance is fine, it also inherits unwanted elements like `<license>` and `<developers>` from the parent.
 To prevent this, the project POM contains empty overrides for these elements.
 If you manually switch to a different parent and actually want the inheritance, you need to remove those overrides.
-
