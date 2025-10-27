@@ -1,4 +1,4 @@
-package config;
+package steps;
 
 import br.com.fiap.ecocontrol.EcocontrolApplication;
 import io.cucumber.spring.CucumberContextConfiguration;
@@ -8,7 +8,8 @@ import org.springframework.test.context.ActiveProfiles;
 @CucumberContextConfiguration
 @SpringBootTest(
         classes = EcocontrolApplication.class,
-        webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT
+        webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT,
+        properties = "spring.profiles.active=test"
 )
 @ActiveProfiles("test")
 public class CucumberSpringConfiguration {
