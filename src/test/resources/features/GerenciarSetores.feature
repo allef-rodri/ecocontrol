@@ -47,3 +47,7 @@ Funcionalidade: Gestão de setores
       """
     Então o status code da resposta deve ser 500
     E a resposta deve conter a mensagem "Erro ao atualizar setor"
+
+  Cenário: Impedir acesso não autenticado aos setores
+    Quando eu enviar uma requisição "GET" sem autenticação para o endpoint "/api/setores"
+    Então o status code da resposta deve ser 401

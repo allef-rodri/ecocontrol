@@ -162,6 +162,7 @@ public class CommonApiSteps {
         switch (metodoNormalizado) {
             case "GET" -> apiService.sendGetWithoutAuth(endpoint);
             case "POST" -> apiService.sendPostWithoutAuth(endpoint, corpoResolvido);
+            case "DELETE" -> apiService.sendDeleteWithoutAuth(endpoint);
             default -> throw new IllegalArgumentException("Método HTTP sem autenticação não suportado: " + metodo);
         }
         response = apiService.getLastResponse();

@@ -50,3 +50,7 @@ Funcionalidade: Gestão de equipamentos
       }
       """
     Então o status code da resposta deve ser 500
+
+  Cenário: Impedir acesso não autenticado aos equipamentos
+    Quando eu enviar uma requisição "GET" sem autenticação para o endpoint "/api/equipamentos/listartodos"
+    Então o status code da resposta deve ser 401

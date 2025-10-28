@@ -49,6 +49,12 @@ public class ApiRequestService extends BaseApiService {
                 .delete(endpoint);
     }
 
+    public void sendDeleteWithoutAuth(String endpoint) {
+        lastResponse = givenJsonWithoutAuth()
+                .when()
+                .delete(endpoint);
+    }
+
     public Response getLastResponse() {
         if (lastResponse == null) {
             throw new IllegalStateException("Nenhuma requisição foi executada ainda.");

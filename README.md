@@ -13,6 +13,21 @@ Os cenários de testes comportamentais foram implementados com Cucumber e RestAs
 
 Ao final da execução, o relatório padrão do Cucumber é exibido no console. Para pipelines de CI, basta reutilizar o mesmo comando.
 
+## Execução com Docker
+
+O projeto inclui um `Dockerfile` multi-stage e um `docker-compose.yml` para subir a API em modo containerizado.
+
+1. Certifique-se de que o Docker Desktop ou engine equivalente está em execução.
+2. Na raiz do repositório, construa e inicialize o serviço:
+   `docker compose up --build -d`
+3. A aplicação ficará disponível em `http://localhost:8080` (porta exposta no compose).
+4. Para acompanhar os logs:
+   `docker compose logs -f`
+5. Quando terminar, pare o container:
+   `docker compose down`
+
+ Por padrão, o `docker-compose.yml` reforça o profile `dev` já definido em `src/main/resources/application.properties` (que aponta para o Oracle da FIAP). Ajuste as variáveis `SPRING_DATASOURCE_URL`, `SPRING_DATASOURCE_USERNAME` e `SPRING_DATASOURCE_PASSWORD` diretamente no compose, via `docker compose --env-file` ou criando novos profiles em `src/main/resources` caso precise apontar para outro banco.
+
 ### Reference Documentation
 For further reference, please consider the following sections:
 
