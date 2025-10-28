@@ -1,5 +1,14 @@
 # Getting Started
 
+## Tecnologias Utilizadas
+
+- **Linguagem / Framework**: Java 17 com Spring Boot 3.4.x (Web, Data JPA, Validation, Security, Flyway)
+- **Banco de Dados**: Oracle (profile `dev`), H2 em memória para os testes automatizados
+- **Testes Automatizados**: Cucumber (JUnit Platform) + RestAssured + JSON Schema Validator
+- **Build / Dependências**: Maven Wrapper, perfil de testes configurado via `application-test.properties`
+- **Containerização**: Dockerfile multi-stage (Eclipse Temurin 17) e `docker-compose` para orquestração
+- **Outros**: Spring Security para autenticação básica, Flyway para migrações, Gson para desserialização nos testes
+
 ## Testes Automatizados com BDD
 
 Os cenários de testes comportamentais foram implementados com Cucumber e RestAssured para validar todas as APIs expostas pela EcoControl.
