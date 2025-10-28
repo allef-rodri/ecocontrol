@@ -9,6 +9,7 @@ Os cenários de testes comportamentais foram implementados com Cucumber e RestAs
 - Os testes sobem a aplicação Spring Boot com o profile `test`, utilizando um banco H2 em memória e dados de carga definidos em `src/test/resources/data.sql`.
 - As chamadas autenticadas usam o usuário `analista/analista123` criado automaticamente durante a inicialização do contexto de testes.
 - Os cenários BDD estão em `src/test/resources/features` e os contratos JSON em `src/test/resources/schemas`.
+- Cada funcionalidade conta com pelo menos um cenário positivo e um cenário negativo para cobrir caminhos felizes e de falha (veja os `.feature` para os detalhes de autenticação, validação de dados e erros de negócio).
 
 Ao final da execução, o relatório padrão do Cucumber é exibido no console. Para pipelines de CI, basta reutilizar o mesmo comando.
 

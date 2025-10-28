@@ -11,10 +11,22 @@ public abstract class BaseApiService {
     private static final String PASSWORD = "analista123";
 
     protected RequestSpecification givenJsonAuthenticated() {
+        return givenJsonWithCredentials(USERNAME, PASSWORD);
+    }
+
+    protected RequestSpecification givenJsonWithCredentials(String username, String password) {
         return RestAssured.given()
                 .baseUri(BASE_URI)
                 .port(PORT)
-                .auth().preemptive().basic(USERNAME, PASSWORD)
+                .auth().preemptive().basic(username, password)
+                .header("Content-Type", "application/json")
+                .accept("application/json");
+    }
+
+    protected RequestSpecification givenJsonWithoutAuth() {
+        return RestAssured.given()
+                .baseUri(BASE_URI)
+                .port(PORT)
                 .header("Content-Type", "application/json")
                 .accept("application/json");
     }

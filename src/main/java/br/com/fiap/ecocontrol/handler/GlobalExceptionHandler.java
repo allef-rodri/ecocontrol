@@ -9,6 +9,7 @@ import br.com.fiap.ecocontrol.exception.setor.ErroAtualizarSetorException;
 import br.com.fiap.ecocontrol.exception.setor.ErroCriarSetorException;
 import br.com.fiap.ecocontrol.exception.setor.ErroExcluirSetorException;
 import br.com.fiap.ecocontrol.exception.setor.SetorNaoEncontradoException;
+import br.com.fiap.ecocontrol.exception.usuario.UsuarioInvalidoException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -64,6 +65,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HealthStatusException.class)
     public ResponseEntity<String> handleHealthStatusException(HealthStatusException ex) {
         return ResponseEntity.status(500).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(UsuarioInvalidoException.class)
+    public ResponseEntity<String> handleUsuarioInvalido(UsuarioInvalidoException e) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
 
     @ExceptionHandler(Exception.class)

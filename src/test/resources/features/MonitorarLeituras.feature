@@ -26,3 +26,15 @@ Funcionalidade: Monitoramento de leituras de consumo
     Então o status code da resposta deve ser 201
     E o corpo da resposta deve corresponder ao esquema JSON "schemas/leituras/leitura.schema.json"
     E o campo "nomeEquipamento" deve possuir o valor "Medidor Solar"
+
+  Cenário: Impedir registro de leitura com equipamento inexistente
+    Quando eu enviar uma requisição "POST" para o endpoint "/leituras" com o corpo:
+      """
+      {
+        "kwhConsumido": 120.0,
+        "dataHoraLeitura": "2024-10-10T10:30:00",
+        "idEquipamento": 9999
+      }
+      """
+    Então o status code da resposta deve ser 500
+    E a resposta deve conter a mensagem "Erro ao cadastrar leitura de consumo"

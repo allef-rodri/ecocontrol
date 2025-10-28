@@ -11,3 +11,7 @@ Funcionalidade: Gestão de alertas
     Então o status code da resposta deve ser 200
     E o corpo da resposta deve corresponder ao esquema JSON "schemas/alertas/listar-alertas.schema.json"
     E a resposta deve conter ao menos 1 itens no campo "content"
+
+  Cenário: Impedir listagem de alertas sem autenticação
+    Quando eu enviar uma requisição "GET" sem autenticação para o endpoint "/api/alertas/listartodos"
+    Então o status code da resposta deve ser 401

@@ -22,6 +22,20 @@ public class ApiRequestService extends BaseApiService {
                 .post(endpoint);
     }
 
+    public void sendPostWithoutAuth(String endpoint, Object requestBody) {
+        lastResponse = givenJsonWithoutAuth()
+                .body(toJson(requestBody))
+                .when()
+                .post(endpoint);
+    }
+
+    public void sendPostWithCredentials(String endpoint, Object requestBody, String username, String password) {
+        lastResponse = givenJsonWithCredentials(username, password)
+                .body(toJson(requestBody))
+                .when()
+                .post(endpoint);
+    }
+
     public void sendPut(String endpoint, Object requestBody) {
         lastResponse = givenJsonAuthenticated()
                 .body(toJson(requestBody))
@@ -40,6 +54,18 @@ public class ApiRequestService extends BaseApiService {
             throw new IllegalStateException("Nenhuma requisição foi executada ainda.");
         }
         return lastResponse;
+    }
+
+    public void sendGetWithoutAuth(String endpoint) {
+        lastResponse = givenJsonWithoutAuth()
+                .when()
+                .get(endpoint);
+    }
+
+    public void sendGetWithCredentials(String endpoint, String username, String password) {
+        lastResponse = givenJsonWithCredentials(username, password)
+                .when()
+                .get(endpoint);
     }
 
     private String toJson(Object requestBody) {

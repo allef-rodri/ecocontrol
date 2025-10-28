@@ -19,3 +19,15 @@ Funcionalidade: Cadastro de usuários
       }
       """
     Então o status code da resposta deve ser 201
+
+  Cenário: Impedir cadastro de usuário com login duplicado
+    Quando eu enviar uma requisição "POST" para o endpoint "/usuarios" com o corpo:
+      """
+      {
+        "login": "analista",
+        "senha": "SenhaSegura123",
+        "role": "ADMIN"
+      }
+      """
+    Então o status code da resposta deve ser 400
+    E a resposta deve conter a mensagem "Usuário com este login já existe."

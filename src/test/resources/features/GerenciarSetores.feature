@@ -36,3 +36,14 @@ Funcionalidade: Gestão de setores
     Então o status code da resposta deve ser 200
     E o corpo da resposta deve corresponder ao esquema JSON "schemas/setores/setor.schema.json"
     E o campo "localizacao" deve possuir o valor "Bloco Azul"
+
+  Cenário: Impedir atualização de setor inexistente
+    Quando eu enviar uma requisição "PUT" para o endpoint "/api/setores/9999" com o corpo:
+      """
+      {
+        "deSetor": "Setor Fantasma",
+        "localizacao": "Bloco X"
+      }
+      """
+    Então o status code da resposta deve ser 500
+    E a resposta deve conter a mensagem "Erro ao atualizar setor"

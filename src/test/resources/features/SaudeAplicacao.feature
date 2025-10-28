@@ -11,3 +11,7 @@ Funcionalidade: Saúde da aplicação
     Então o status code da resposta deve ser 200
     E o corpo da resposta deve corresponder ao esquema JSON "schemas/home/health.schema.json"
     E o campo "status" deve possuir o valor "UP"
+
+  Cenário: Impedir consulta ao status sem autenticação
+    Quando eu enviar uma requisição "GET" sem autenticação para o endpoint "/"
+    Então o status code da resposta deve ser 401

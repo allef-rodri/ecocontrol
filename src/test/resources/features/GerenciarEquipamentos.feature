@@ -37,3 +37,16 @@ Funcionalidade: Gestão de equipamentos
     Quando eu enviar uma requisição "GET" para o endpoint "/api/equipamentos/{id}" utilizando o id armazenado em "equipamentoId"
     Então o status code da resposta deve ser 404
     E a resposta deve conter a mensagem "Equipamento com ID"
+
+  Cenário: Impedir cadastro de equipamento com dados inválidos
+    Quando eu enviar uma requisição "POST" para o endpoint "/api/equipamentos" com o corpo:
+      """
+      {
+        "deEquipamento": "",
+        "tipo": "SENSOR",
+        "consumoMaximo": 150.0,
+        "status": "ATIVO",
+        "idSetor": 1
+      }
+      """
+    Então o status code da resposta deve ser 500

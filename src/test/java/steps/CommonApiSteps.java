@@ -40,6 +40,26 @@ public class CommonApiSteps {
         executeRequest(metodo, endpoint, corpo);
     }
 
+    @Quando("eu enviar uma requisição {string} sem autenticação para o endpoint {string}")
+    public void euEnviarUmaRequisicaoSemAutenticacaoParaOEndpoint(String metodo, String endpoint) {
+        executeRequestWithoutAuth(metodo, endpoint, null);
+    }
+
+    @Quando("eu enviar uma requisição {string} sem autenticação para o endpoint {string} com o corpo:")
+    public void euEnviarUmaRequisicaoSemAutenticacaoParaOEndpointComOCorpo(String metodo, String endpoint, String corpo) {
+        executeRequestWithoutAuth(metodo, endpoint, corpo);
+    }
+
+    @Quando("eu enviar uma requisição {string} com credenciais {string} e {string} para o endpoint {string}")
+    public void euEnviarUmaRequisicaoComCredenciaisParaOEndpoint(String metodo, String usuario, String senha, String endpoint) {
+        executeRequestWithCredentials(metodo, endpoint, null, usuario, senha);
+    }
+
+    @Quando("eu enviar uma requisição {string} com credenciais {string} e {string} para o endpoint {string} com o corpo:")
+    public void euEnviarUmaRequisicaoComCredenciaisParaOEndpointComOCorpo(String metodo, String usuario, String senha, String endpoint, String corpo) {
+        executeRequestWithCredentials(metodo, endpoint, corpo, usuario, senha);
+    }
+
     @Quando("eu enviar uma requisição {string} para o endpoint {string} utilizando o id armazenado em {string}")
     public void euEnviarUmaRequisicaoParaOEndpointUtilizandoOIdArmazenadoEm(String metodo, String endpointTemplate, String chave) {
         Object valor = contexto.get(chave);
@@ -132,6 +152,28 @@ public class CommonApiSteps {
             case "PUT" -> apiService.sendPut(endpoint, corpoResolvido);
             case "DELETE" -> apiService.sendDelete(endpoint);
             default -> throw new IllegalArgumentException("Método HTTP não suportado: " + metodo);
+        }
+        response = apiService.getLastResponse();
+    }
+
+    private void executeRequestWithoutAuth(String metodo, String endpoint, String corpo) {
+        String metodoNormalizado = metodo.trim().toUpperCase();
+        String corpoResolvido = corpo == null ? null : resolvePlaceholders(corpo);
+        switch (metodoNormalizado) {
+            case "GET" -> apiService.sendGetWithoutAuth(endpoint);
+            case "POST" -> apiService.sendPostWithoutAuth(endpoint, corpoResolvido);
+            default -> throw new IllegalArgumentException("Método HTTP sem autenticação não suportado: " + metodo);
+        }
+        response = apiService.getLastResponse();
+    }
+
+    private void executeRequestWithCredentials(String metodo, String endpoint, String corpo, String usuario, String senha) {
+        String metodoNormalizado = metodo.trim().toUpperCase();
+        String corpoResolvido = corpo == null ? null : resolvePlaceholders(corpo);
+        switch (metodoNormalizado) {
+            case "GET" -> apiService.sendGetWithCredentials(endpoint, usuario, senha);
+            case "POST" -> apiService.sendPostWithCredentials(endpoint, corpoResolvido, usuario, senha);
+            default -> throw new IllegalArgumentException("Método HTTP com credenciais personalizadas não suportado: " + metodo);
         }
         response = apiService.getLastResponse();
     }
